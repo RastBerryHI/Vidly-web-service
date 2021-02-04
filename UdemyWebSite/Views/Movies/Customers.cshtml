@@ -1,0 +1,39 @@
+﻿@model UdemyWebSite.ViewModels.RandomMovieViewModel
+
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    string className = Model.Customers.Count > 5 ? "popular" : null;
+}
+
+<h2 class="@className">Customers</h2>
+
+@if (Model.Customers.Count == 0)
+{
+    <p>No one has rented this movie before.</p>
+}
+else
+{    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Movie</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr class="table-active">
+                    <th scope="row"><a href=@string.Format("https://localhost:44331/Movies/Details/{0}", @customer.Id)>@customer.Name</a></th>
+                    <td>@customer.Movie</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
